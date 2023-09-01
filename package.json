@@ -1,0 +1,24 @@
+{
+	"name": "nuxt-app",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"devDependencies": {
+		"@nuxt/devtools": "latest",
+		"eslint": "^8.48.0",
+		"eslint-plugin-vue": "^9.17.0",
+		"nuxt": "^3.7.0",
+		"prettier": "^3.0.3",
+		"prettier-eslint": "^15.0.1"
+	},
+	"dependencies": {
+		"@pinia/nuxt": "^0.4.11",
+		"nuxt-svgo": "^3.5.0",
+		"pinia": "^2.1.6"
+	}
+}

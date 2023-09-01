@@ -1,0 +1,24 @@
+:root {
+    /* Colors: */
+    --rpsg-yellow: #FDC760;
+    --makemake-clay: #D8D9BD;
+    --jax-green: #1B8E83;
+    --indestructible-green: #52A94D;
+    --a52-orange: #F58220;
+    --a52-color-red: #CD1A45;
+    --elastic-blue: #3695B6;
+    --makemake-black: #282828;
+    --black: #000000;
+
+    /* Heights: */
+    --unit-100vh: 100vh;
+
+    /* Fonts: */
+    --font-primary: "RM Neue", sans-serif;
+}
+
+@supports (height: 100dvh) {
+    :root {
+        --unit-100vh: 100dvh;
+    }
+}

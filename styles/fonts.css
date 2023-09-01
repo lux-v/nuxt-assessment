@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "RM Neue";
+    src: url("~/assets/fonts/RMNeue-Regular.woff2") format("woff2"),
+        url("~/assets/fonts/RMNeue-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "RM Neue";
+    src: url("~/assets/fonts/RMNeue-Italic.woff2") format("woff2"),
+        url("~/assets/fonts/RMNeue-Italic.woff") format("woff");
+    font-style: italic;
+    font-weight: 400;
+}
