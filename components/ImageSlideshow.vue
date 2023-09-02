@@ -1,5 +1,5 @@
 <template>
-    <div class="slideshow-container" @mouseleave="stopSlideshow()">
+    <div class="slideshow-container" @mouseleave=" intervalId ? stopSlideshow() : null">
         <div v-for="(page) in pages" :key="page.id" class="slideshow-item" @mouseenter="startSlideshow(page.featuredImage)">
             {{ page.title }}
         </div>
@@ -21,12 +21,11 @@ const currentIndex = ref(null);
 const slideshowImages = ref(images);
 let intervalId = null;
 
-
 const startSlideshow = (featuredImage) => {
     stopSlideshow();
-    currentIndex.value = 0;
-
-    addFeaturedImageAsFirstElement(featuredImage)
+    //start slideshow from the featured image
+    const featuredImageIndex = slideshowImages.value.findIndex(image => image.id === featuredImage.id);
+    currentIndex.value = featuredImageIndex;
 
     intervalId = setInterval(() => {
         currentIndex.value =
@@ -36,22 +35,27 @@ const startSlideshow = (featuredImage) => {
 
 const stopSlideshow = () => {
     clearInterval(intervalId);
+    intervalId = null;
     currentIndex.value = null;
 };
 
-const addFeaturedImageAsFirstElement = (featuredImage) => {
-    const featuredImageExists = slideshowImages.value.find(image => image.id === featuredImage.id)
+const addFeaturedImagesInSlideshow = () => {
+    // returns featuredImage object from 'pages' that are not in the 'slideshowImages' list
+    const imagesNotInSlideshow = pages.filter(page => !slideshowImages.value.some(slide => page.featuredImage.id === slide.id))
+        .map(page => page.featuredImage)
 
-    featuredImageExists ?
-        slideshowImages.value = slideshowImages.value.sort(function (x, y) { return x.id == featuredImage.id ? -1 : y.id == featuredImage.id ? 1 : 0; })
-        :
-        slideshowImages.value = [featuredImage, ...slideshowImages.value]
-
+    slideshowImages.value.push(...imagesNotInSlideshow)
 }
 
 onBeforeUnmount(() => {
     stopSlideshow();
 });
+
+// loads all neccessary images into slideshowImages list
+// prevents initial image load when hover over text 
+onMounted(() => {
+    addFeaturedImagesInSlideshow()
+})
 
 const handleImageError = (event) => {
     console.error('Image failed to load:', event.target.src);
